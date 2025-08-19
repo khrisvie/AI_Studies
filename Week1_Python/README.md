@@ -7,4 +7,4 @@
 - `eda.ipynb` — interactive notebook
 - `eda.py` — Python script version
 - `README.md` — project description
-- `data.md` - data in CSV format
+- `data.csv` - data in CSV format
