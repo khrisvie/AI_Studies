@@ -1,2 +1,4 @@
-Date,Category,Desrpiption,Amount
-
+Date,Category,Description,Amount,Currency
+31.05.2007,eee,f,125.0,$
+23.06.2008,ccc,f,160.0,$
+16.08.1994,rrr,g,124.0,$
