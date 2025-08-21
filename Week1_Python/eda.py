@@ -21,7 +21,6 @@ def add_entry():
                 currency = input("Enter currency symbol: ")
 
             amount_ = float(amount_)
-
             writer.writerow({
                 "Date": date,
                 "Category": category,
@@ -56,4 +55,71 @@ def view_entries():
     
     display(display_df)
 
-view_entries()
+#view_entries()
+
+#def summary():
+    df = pd.read_csv("data.csv")
+
+    if df.empty:
+        print("No data to analyze.")
+        return
+
+    df["Amount"] = pd.to_numeric(df["Amount"], errors="coerce")
+    
+    grouped = df.groupby("Category", as_index=False)["Amount"].sum()
+    grouped.columns = ["Category", "Total Amount"]
+
+    print(grouped.to_string(index=False))
+
+#summary()
+
+#def average():
+    df = pd.read_csv("data.csv")
+
+    if df.empty:
+        print("No data to analyze.")
+        return
+    
+    df["Amount"] = pd.to_numeric(df["Amount"], errors="coerce")
+
+    grouped = df.groupby("Category", as_index=False)["Amount"].mean()
+    grouped.columns = ["Category", "Average Amount"]
+
+    print(grouped.to_string(index=False))
+
+#average()
+
+#def count():
+    df = pd.read_csv("data.csv")
+
+    if df.empty:
+        print("No data to analyze.")
+        return
+    
+    counts = df.groupby("Category", as_index=False).size()
+    counts.columns = ["Category", "Number of entries"]
+
+    print(counts.to_string(index=False))
+
+#count()
+
+
+def statistics():
+    df = pd.read_csv("data.csv")
+
+    if df.empty:
+        print("No data to analyze.")
+        return
+    
+    df["Amount"] = pd.to_numeric(df["Amount"], errors="coerce")
+
+    grouped = df.groupby("Category", as_index=False).agg(
+        Total_Amount=("Amount", "sum"),
+        Average_Amount=("Amount", "mean"),
+        Num_Entries=("Amount", "count")
+    ).reset_index()
+
+    grouped = grouped.round(2)
+    print(grouped.to_string(index=False))
+
+statistics()
